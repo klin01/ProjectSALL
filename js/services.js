@@ -1,6 +1,13 @@
 angular.module('SallServices', ['ngResource']).
 	factory('YelpAPI', function($resource) {
-		return $resource('http://localhost/UIDAssignment1/proxy.php?url=:url', {}, {
+		return $resource('http://localhost/projectsall/proxy.php?url=:url&term=:term&location=:location'
+							+ "&oauth_consumer_key=:oauth_consumer_key"
+							+ "&oauth_consumer_secret=:oauth_consumer_secret"
+							+ "&oauth_nonce=:oauth_nonce"
+							+ "&oauth_signature_method=:oauth_signature_method"
+							+ "&oauth_timestamp=:oauth_timestamp"
+							+ "&oauth_token=:oauth_token"
+							+ "&oauth_signature=:oauth_signature", {}, {
 			query: {method: 'GET', params: {}, isArray: false}
 		});
 	})
@@ -23,6 +30,7 @@ angular.module('SallServices', ['ngResource']).
 					parameters.push(['sort', sort]);
 				if (category_filter != null)
 					parameters.push(['category_filter', category_filter]);
+				parameters.push(['location', 'New+York']);
 				//parameters.push(['callback', 'cb']);
 				parameters.push(['oauth_consumer_key', 'UZL6qwkoVqDIByHuz4WF7g']);
 				parameters.push(['oauth_consumer_secret', 'WEmWod-6fiDU0sR8o5_J8THvv1A']);
@@ -38,7 +46,12 @@ angular.module('SallServices', ['ngResource']).
 				OAuth.setTimestampAndNonce(message);
 				OAuth.SignatureMethod.sign(message, accessor);
 
-				return message.action + '?' + OAuth.SignatureMethod.normalizeParameters(message.parameters);
+				var parameterMap = OAuth.getParameterMap(message.parameters);
+				//parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+
+				return message.action + '?' + OAuth.SignatureMethod.normalizeParameters(message.parameters) 
+					+ "&oauth_signature=" + OAuth.percentEncode(parameterMap.oauth_signature);
+				//return parameterMap;
 			}
 		};
 	});
