@@ -1,6 +1,6 @@
 angular.module('SallServices', ['ngResource']).
 	factory('YelpAPI', function($resource) {
-		return $resource('http://localhost/projectsall/proxy.php?url=:url&term=:term&location=:location'
+		return $resource('proxy.php?url=:url&term=:term&location=:location'
 							+ "&oauth_consumer_key=:oauth_consumer_key"
 							+ "&oauth_consumer_secret=:oauth_consumer_secret"
 							+ "&oauth_nonce=:oauth_nonce"
