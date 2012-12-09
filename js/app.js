@@ -8,3 +8,12 @@ angular.module('ProjectSALL', ['SallServices']).
 			otherwise({redirectTo:'/'});
 	});
 
+var SavedLists;
+
+window.onload = function(){
+  if (localStorage.lists !== 'undefined')
+    SavedLists = JSON.parse(localStorage.lists);
+};
+window.onbeforeunload = function(){
+  localStorage.lists = JSON.stringify(SavedLists);
+};
