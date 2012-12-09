@@ -98,7 +98,6 @@ angular.module('SallServices', ['ngResource']).
       }
 		};
 	})
-<<<<<<< HEAD
   .factory('SearchParse', function() {
     return {
       scrub: function(results) {
