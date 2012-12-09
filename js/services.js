@@ -197,6 +197,7 @@ angular.module('SallServices', ['ngResource']).
             review.excerpt = rv.excerpt;
             review.user = rv.user.name;
           });
+          return item;
         }
     }  
   });
