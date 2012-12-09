@@ -94,7 +94,20 @@ angular.module('SallServices', ['ngResource']).
 				//return parameterMap;
 			}
 		};
-	});
+	})
+	.factory('URL_Params', function() {
+    var hash = window.location.hash.split('#');
+    hash = hash[hash.length-1];
+    var pairs = hash.split('&');
+    var parameters = {};
+    for (var i = 0; i < pairs.length; i++){
+      var keyValue = pairs[i].split('=');
+      parameters[keyValue[0]] = keyValue[1];
+    }
+    console.log(parameters);
+    return parameters;
+  });
+
 
 var auth = { 
   //
