@@ -48,7 +48,27 @@ angular.module('SallServices', ['ngResource']).
               consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
 				  	  tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
             }
-          }
+          },
+          {
+            owner: 'ron2',
+            oauth_consumer_key: 'nF8RKvn6uMd8wIUXVLhvHg',
+            oauth_consumer_secret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+            oauth_token: 'CuQ4y866Q6iEz8XVbua922J4fgYMJgc4',
+            accessor: {
+              consumerSecret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+				  	  tokenSecret: 'w93Pt2gGba328_OSncj8FxHkjKs'
+            }
+          },
+          {
+            owner: 'ron3',
+            oauth_consumer_key: 'lXkkkeStEoJiBDi69cCpNw',
+            oauth_consumer_secret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+            oauth_token: 'cz5w-nSKGkA3NDomq2S4diSqboZdwVYb',
+            accessor: {
+              consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+				  	  tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
+            }
+          },
         ];
         var randomIndex = Math.floor(Math.random()*credentials_list.length);
         var credentials = credentials_list[randomIndex];
