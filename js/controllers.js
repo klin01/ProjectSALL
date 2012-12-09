@@ -6,3 +6,4 @@ function ListsController ($scope, YelpAPI, OAuthRequest) {
     console.log(rsp);
 	});
 }
+
