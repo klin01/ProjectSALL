@@ -98,51 +98,6 @@ angular.module('SallServices', ['ngResource']).
       }
 		};
 	})
-  .factory('SearchParse', function() {
-    return {
-      scrub: function(results) {
-        var items = [];
-        _.each(results.businesses, function(item) {
-          var result = {};
-          result.id = item.id;
-          result.name = item.name;
-          result.rating = item.rating;
-          result.img_url = item.img_url;
-          result.url = item.url;
-          result.phone = item.phone;
-          result.snippet_text = item.snippet_text;
-          result.address = item.location.display_address; //array
-          result.location = item.location.neighborhoods; //array
-          result.categories = item.categories; //array
-          items.push(result);
-        });
-        return items;
-      }
-    };
-  })
-  .factory('BusinessParse', function() {
-    return {
-        scrub: function(result) {
-          var item = {};
-          item.id = result.id;
-          item.name = result.name;
-          item.url = result.url;
-          item.rating = result.rating;
-          item.review_count = result.review_count;
-          item.img_url = result.img_url;
-          item.address = result.location.display_address; //array
-          item.neighborhoods = result.location.neighborhoods; //array
-          item.categories = result.categories; //array
-          item.phone = result.display_phone;
-          item.reviews = _.each(result.reviews, function (rv) {
-            var review = {};
-            review.rating = rv.rating;
-            review.excerpt = rv.excerpt;
-            review.user = rv.user.name;
-          });
-        }
-    }  
-  })
 	.factory('URL_Params', function() {
     var hash = window.location.hash.split('#');
     hash = hash[hash.length-1];
