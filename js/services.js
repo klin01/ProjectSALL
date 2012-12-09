@@ -14,11 +14,6 @@ angular.module('SallServices', ['ngResource']).
 	.factory('OAuthRequest', function() {
 		return {
 			buildSearchUrl: function(term, limit, offset, sort, category_filter) {
-				var accessor = {
-				  	consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
-				  	tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
-				};
-
 				parameters = [];
 				if (term != null)
 					parameters.push(['term', term]);
@@ -32,9 +27,34 @@ angular.module('SallServices', ['ngResource']).
 					parameters.push(['category_filter', category_filter]);
 				parameters.push(['location', 'New+York']);
 				//parameters.push(['callback', 'cb']);
-				parameters.push(['oauth_consumer_key', 'UZL6qwkoVqDIByHuz4WF7g']);
-				parameters.push(['oauth_consumer_secret', 'WEmWod-6fiDU0sR8o5_J8THvv1A']);
-				parameters.push(['oauth_token', 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX']);
+
+        var credentials_list = [
+          {
+            owner: 'kevin',
+            oauth_consumer_key: 'UZL6qwkoVqDIByHuz4WF7g',
+            oauth_consumer_secret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+            oauth_token: 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX',
+            accessor: {
+              consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+				  	  tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
+            }
+          },
+          {
+            owner: 'ron',
+            oauth_consumer_key: 'KdILwA5w8bjV8NTx47HkJA',
+            oauth_consumer_secret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+            oauth_token: '7dMxuTAzgUVczcnpBdkOpJV4nEt2hLAu',
+            accessor: {
+              consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+				  	  tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
+            }
+          }
+        ];
+        var randomIndex = Math.floor(Math.random()*credentials_list.length);
+        var credentials = credentials_list[randomIndex];
+        parameters.push(['oauth_consumer_key', credentials.oauth_consumer_key]);
+				parameters.push(['oauth_consumer_secret', credentials.oauth_consumer_secret]);
+				parameters.push(['oauth_token', credentials.oauth_token]);
 				parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
 				var message = { 
@@ -44,7 +64,7 @@ angular.module('SallServices', ['ngResource']).
 				};
 
 				OAuth.setTimestampAndNonce(message);
-				OAuth.SignatureMethod.sign(message, accessor);
+				OAuth.SignatureMethod.sign(message, credentials.accessor);
 
 				var parameterMap = OAuth.getParameterMap(message.parameters);
 				//parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
