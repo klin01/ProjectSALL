@@ -175,6 +175,7 @@ angular.module('SallServices', ['ngResource']).
   .factory('SearchParse', function() {
     return {
       scrub: function(results) {
+        if (!_.isUndefined(results.error)) alert('Yelp Error: ' + results.error.text);
         var items = [];
         _.each(results.businesses, function(item) {
           var result = {};
