@@ -9,7 +9,8 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
         $scope.addListText = '';
     };
 
-    var samplesearchresults;
+  /*
+  var samplesearchresults;
 	YelpAPI.query({ url: encodeURIComponent(test) }, function(rsp) {
     	samplesearchresults = SearchParse.scrub(rsp);
     	console.log(samplesearchresults);
