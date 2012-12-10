@@ -98,7 +98,6 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
   
 }
 
-<<<<<<< HEAD
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params){
 
   //TODO - get search from URL params
@@ -183,8 +182,6 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
   
 }
 
-=======
->>>>>>> rs_resolved_commit
 function ResetController(){
   SavedLists = [];
 }
