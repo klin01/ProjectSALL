@@ -6,7 +6,7 @@ angular.module('SallServices', ['ngResource']).
 	})
 	.factory('OAuthRequest', function() {
 		return {
-			buildSearchUrl: function(term, limit, offset, sort, category_filter) {
+			buildSearchUrl: function(term, limit, offset, sort, category_filter, location) {
 				parameters = [];
 				if (term != null)
 					parameters.push(['term', term]);
@@ -18,7 +18,8 @@ angular.module('SallServices', ['ngResource']).
 					parameters.push(['sort', sort]);
 				if (category_filter != null)
 					parameters.push(['category_filter', category_filter]);
-				parameters.push(['location', 'New+York']);
+        location = location ? location : 'New+York'; //if location isn't set, default to New+York
+				parameters.push(['location', location]);
 				//parameters.push(['callback', 'cb']);
 
         var credentials_list = [
@@ -157,15 +158,19 @@ angular.module('SallServices', ['ngResource']).
 		};
 	})
 	.factory('URL_Params', function() {
-    var hash = window.location.hash.split('#');
-    hash = hash[hash.length-1];
-    var pairs = hash.split('&');
-    var parameters = {};
-    for (var i = 0; i < pairs.length; i++){
-      var keyValue = pairs[i].split('=');
-      parameters[keyValue[0]] = keyValue[1];
+    return {
+      parse: function(){
+        var hash = window.location.hash.split('#');
+        hash = hash[hash.length-1];
+        var pairs = hash.split('&');
+        var parameters = {};
+        for (var i = 0; i < pairs.length; i++){
+          var keyValue = pairs[i].split('=');
+          parameters[keyValue[0]] = keyValue[1];
+        }
+        return parameters;
+      }
     }
-    return parameters;
   })
   .factory('SearchParse', function() {
     return {

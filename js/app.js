@@ -29,5 +29,10 @@ window.onbeforeunload = function(){
 Mousetrap.bind('enter', function(){
   if ($('#searchBar').is(":focus") ||
       $('#locationBar').is(":focus"))
-    window.location= window.location.origin + window.location.pathname + '#/search';
+    onSearchClicked();
+    //window.location= window.location.origin + window.location.pathname + $('#searchAnchor').attr('href');
 });
+
+function onSearchClicked(){
+  window.location= window.location.origin + window.location.pathname + '#/search#query='+$('#searchBar').val();
+};

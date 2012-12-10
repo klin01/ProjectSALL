@@ -15,13 +15,21 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 }
 
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params, $location){
-  //TODO - get search from URL params
   //TODO - Have some sort of notifications system/display of system status
-  //var queryString = URL_Params.query ? URL_Params.query : 'chinese';
-  var queryString = $('#searchBar').val() ? $('#searchBar').val() : 'chinese';
-  $('#searchBar').val(''); //clear the search bar
+  //TODO - next/previous paging
+  URL_Params = URL_Params.parse()
   
-  var request = OAuthRequest.buildSearchUrl(queryString);
+  var queryString = URL_Params.query ? URL_Params.query : 'chinese';
+  $('#searchBar').val(''); //clear the search bar
+  var location = URL_Params.location ? URL_Params.location : 'New+York';
+  $('#locationBar').val(''); //clear the location bar
+  var limit = 20;
+  var offset = URL_Params.offset ? URL_Params.offset : 0;
+  var sort = URL_Params.sort ? URL_Params.sort : 0;
+  var category_filter = URL_Params.category_filter ? URL_Params.category_filter : null;
+  
+  var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);
+
   $('#search-loading-icon').show();
 	YelpAPI.query({ url: encodeURIComponent(request) }, function(yelpResponse) {
     $('#search-loading-icon').hide();
