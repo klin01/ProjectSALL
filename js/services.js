@@ -217,6 +217,7 @@ angular.module('SallServices', ['ngResource']).
   .factory('BusinessParse', function() {
     return {
         scrub: function(result) {
+          if (!_.isUndefined(results.error)) alert('Yelp Error: ' + results.error.text);
           var item = {};
           item.id = result.id;
           item.name = result.name;
