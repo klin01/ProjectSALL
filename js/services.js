@@ -50,7 +50,17 @@ var credentials_list = [
       consumerSecret: 'OuNaoY0JwZhwh8L65YoEx2BoVrw',
 			tokenSecret: 'wyt6tZPpbH0KdqeCLnQXdQ86iE0'
     }
-  }
+  },
+    {
+      owner: 'john',
+      oauth_consumer_key: 'f7zEDdYZSwuf2cBE0DXGrw',
+      oauth_consumer_secret: 'kDmTrs8AkDmC6ZRHmL6YMLaKI5c',
+      oauth_token: 'apllBIdzs-aQaSf1m_gN2veZLoY08kTs',
+      accessor: {
+        consumerSecret: 'kDmTrs8AkDmC6ZRHmL6YMLaKI5c',
+        tokenSecret: 'yc-sTQAoy9-av2G4A3Ba08Cfwqw'
+      }
+   }
 ];
 
 angular.module('SallServices', ['ngResource']).
