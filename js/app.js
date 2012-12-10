@@ -34,5 +34,9 @@ Mousetrap.bind('enter', function(){
 });
 
 function onSearchClicked(){
-  window.location= window.location.origin + window.location.pathname + '#/search#query='+$('#searchBar').val();
+  var query = $('#searchBar').val().split(' ').join('+');
+  var location = $('#locationBar').val().split(' ').join('+');
+  window.location= window.location.origin + window.location.pathname +
+    '#/search#query='+ query +
+    '&location='+ location;
 };
