@@ -8,3 +8,13 @@
 .add-new-list {
     margin: 10px 0 -10px;
 }
+.navbar input[type=search]{
+    margin-top: 5px;
+    height: 18px;
+}
+.navbar .btn{
+    margin-top: 0px;
+}
+#locationBar {
+    width:220px;
+}

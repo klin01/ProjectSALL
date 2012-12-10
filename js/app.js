@@ -24,3 +24,10 @@ window.onload = function(){
 window.onbeforeunload = function(){
   localStorage.lists = JSON.stringify(SavedLists);
 };
+
+//Mousetrap is a library that makes binding keyboard shortcuts to functions easy
+Mousetrap.bind('enter', function(){
+  if ($('#searchBar').is(":focus") ||
+      $('#locationBar').is(":focus"))
+    window.location= window.location.origin + window.location.pathname + '#/search';
+});
