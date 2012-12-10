@@ -18,6 +18,9 @@
 #locationBar {
     width:220px;
 }
+#searchBar {
+	width: 350px;
+}
 a.previousPage, a.nextPage {
     display:none;
 }
