@@ -2,6 +2,8 @@
   <div class="row-fluid">
     <div class="span3">
       <div class="hero-unit">
+      <p><input type="text" class="addBar" ng-model="addListText" ng-model-instant>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
+      <div class="well sidebar-nav">
         <ul class="nav nav-list">
           <h4> Filter by Tags: </h4>
           <li ng-repeat="list in lists" class="nav-header">

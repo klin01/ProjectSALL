@@ -2,14 +2,16 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 	var test = OAuthRequest.buildSearchUrl('chinese');
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
 
+  /*
     $scope.lists = SavedLists;
 
     $scope.addNew = function () {
         SavedLists.push({name:$scope.addListText, venues: []});
         $scope.addListText = '';
     };
-    /*
-     var samplesearchresults;
+
+>>>>>>> Implemented 'AddList' functionality in local storage
+	var samplesearchresults;
 	YelpAPI.query({ url: encodeURIComponent(test) }, function(rsp) {
     	samplesearchresults = SearchParse.scrub(rsp);
     	console.log(samplesearchresults);
@@ -20,6 +22,8 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
     	console.log(samplebusinessresult);
 	});
   */
+
+  $scope.lists = SavedLists;
 }
 
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params, $location){

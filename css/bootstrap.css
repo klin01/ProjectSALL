@@ -11823,3 +11823,8 @@ a.badge:hover {
      -moz-border-radius: 6px;
           border-radius: 6px;
 }
+
+.addBar{
+    margin-top: 10px;
+    width: 150px;
+}
