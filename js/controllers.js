@@ -14,11 +14,13 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 	});
 }
 
-function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params){
-
+function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params, $location){
   //TODO - get search from URL params
   //TODO - Have some sort of notifications system/display of system status
-  var queryString = URL_Params.query ? URL_Params.query : 'chinese';
+  //var queryString = URL_Params.query ? URL_Params.query : 'chinese';
+  var queryString = $('#searchBar').val() ? $('#searchBar').val() : 'chinese';
+  $('#searchBar').val(''); //clear the search bar
+  
   var request = OAuthRequest.buildSearchUrl(queryString);
   $('#search-loading-icon').show();
 	YelpAPI.query({ url: encodeURIComponent(request) }, function(yelpResponse) {
@@ -66,6 +68,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         if (labels.length !== 0){
           listsHTML = '<br><form class="lists-form form-inline">'+listsHTML;
         }
+        //TODO - maybe at a "Close/Cancel" button?
         item.save = function(){
           var count = 0;
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
