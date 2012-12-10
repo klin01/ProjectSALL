@@ -35,11 +35,7 @@
       <p id="search-loading-icon"><img src="img/ajax-loader.gif"/> Loading...</p>
       <table class="table table-striped">
       	<tr ng-repeat="result in results" id="{{result.id}}">
-<<<<<<< HEAD
-					<td width="120"><img src="{{result.img_url}}"></td>
-=======
 					<td width="120"><img src="{{result.image_url}}"></td>
->>>>>>> rs_resolved_commit
 					<td><p><strong class="search-item-title"><a href="{{result.url}}">{{result.name}}</a></strong><p>
 					  Category: {{result.categories.join(", ")}}<br>
 					  Location: {{result.location.join(", ")}}

@@ -176,10 +176,7 @@ angular.module('SallServices', ['ngResource']).
           result.id = item.id;
           result.name = item.name;
           result.rating = item.rating;
-<<<<<<< HEAD
-=======
           result.image_url = item.image_url;
->>>>>>> rs_resolved_commit
           result.ratingString = "";
           var star = '&#9733;';
           var emptyStar = '&#9734;';
@@ -189,10 +186,6 @@ angular.module('SallServices', ['ngResource']).
           while (result.ratingString.length < 5*star.length){
             result.ratingString += emptyStar;
           }
-<<<<<<< HEAD
-          result.img_url = item.image_url;
-=======
->>>>>>> rs_resolved_commit
           result.url = item.url;
           result.phone = item.phone;
           result.snippet_text = item.snippet_text;
