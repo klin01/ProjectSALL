@@ -61,6 +61,16 @@ var credentials_list = [
 			tokenSecret: 'FOXGKLiy_3mUaJGoMnHhe5EfJTA'
     }
   },
+  {
+    owner: 'ron6',
+    oauth_consumer_key: '-cXX_rJDlbrxxRcx7ZK1UQ',
+    oauth_consumer_secret: 'Oc0xxpcud8yt6P3HTzo4FKjELXE',
+    oauth_token: 'Xugy7Y4pSeXIq6TB0K6u9MOKOy7P-sjZ',
+    accessor: {
+      consumerSecret: 'Oc0xxpcud8yt6P3HTzo4FKjELXE',
+			tokenSecret: 'oXcMK9vMC4MvPBzmcMVYMGNTmY8'
+    }
+  }
     {
       owner: 'john',
       oauth_consumer_key: 'f7zEDdYZSwuf2cBE0DXGrw',
