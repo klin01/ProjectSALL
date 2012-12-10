@@ -1,3 +1,58 @@
+var credentials_list = [
+  /*
+  {
+    owner: 'kevin',
+    oauth_consumer_key: 'UZL6qwkoVqDIByHuz4WF7g',
+    oauth_consumer_secret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+    oauth_token: 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX',
+    accessor: {
+      consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+		  tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
+    }
+  },
+  {
+    owner: 'ron',
+    oauth_consumer_key: 'KdILwA5w8bjV8NTx47HkJA',
+    oauth_consumer_secret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+    oauth_token: '7dMxuTAzgUVczcnpBdkOpJV4nEt2hLAu',
+    accessor: {
+      consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+		  tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
+    }
+  },
+  {
+    owner: 'ron2',
+    oauth_consumer_key: 'nF8RKvn6uMd8wIUXVLhvHg',
+    oauth_consumer_secret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+    oauth_token: 'CuQ4y866Q6iEz8XVbua922J4fgYMJgc4',
+    accessor: {
+      consumerSecret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+		  tokenSecret: 'w93Pt2gGba328_OSncj8FxHkjKs'
+    }
+  },
+  {
+    owner: 'ron3',
+    oauth_consumer_key: 'lXkkkeStEoJiBDi69cCpNw',
+    oauth_consumer_secret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+    oauth_token: 'cz5w-nSKGkA3NDomq2S4diSqboZdwVYb',
+    accessor: {
+      consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+			tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
+    }
+  },
+  */
+  {
+    owner: 'ron4',
+    oauth_consumer_key: 'YA4mXxU3RxhIUyGgUpkYFA',
+    oauth_consumer_secret: 'OuNaoY0JwZhwh8L65YoEx2BoVrw',
+    oauth_token: 'fFQ9TujyU1vODZT10_G3Y3O6s4H3y2N1',
+    accessor: {
+      consumerSecret: 'OuNaoY0JwZhwh8L65YoEx2BoVrw',
+			tokenSecret: 'wyt6tZPpbH0KdqeCLnQXdQ86iE0'
+    }
+  }
+];
+
 angular.module('SallServices', ['ngResource']).
 	factory('YelpAPI', function($resource) {
 		return $resource('proxy.php?url=:url', {}, {
@@ -22,48 +77,7 @@ angular.module('SallServices', ['ngResource']).
 				parameters.push(['location', location]);
 				//parameters.push(['callback', 'cb']);
 
-        var credentials_list = [
-          {
-            owner: 'kevin',
-            oauth_consumer_key: 'UZL6qwkoVqDIByHuz4WF7g',
-            oauth_consumer_secret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
-            oauth_token: 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX',
-            accessor: {
-              consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
-				  	  tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
-            }
-          },
-          {
-            owner: 'ron',
-            oauth_consumer_key: 'KdILwA5w8bjV8NTx47HkJA',
-            oauth_consumer_secret: 'nhFInOMyjm95pK9iyKy92drlaQc',
-            oauth_token: '7dMxuTAzgUVczcnpBdkOpJV4nEt2hLAu',
-            accessor: {
-              consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
-				  	  tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
-            }
-          },
-          {
-            owner: 'ron2',
-            oauth_consumer_key: 'nF8RKvn6uMd8wIUXVLhvHg',
-            oauth_consumer_secret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
-            oauth_token: 'CuQ4y866Q6iEz8XVbua922J4fgYMJgc4',
-            accessor: {
-              consumerSecret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
-				  	  tokenSecret: 'w93Pt2gGba328_OSncj8FxHkjKs'
-            }
-          },
-          {
-            owner: 'ron3',
-            oauth_consumer_key: 'lXkkkeStEoJiBDi69cCpNw',
-            oauth_consumer_secret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
-            oauth_token: 'cz5w-nSKGkA3NDomq2S4diSqboZdwVYb',
-            accessor: {
-              consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
-				  	  tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
-            }
-         }
-        ];
+        
         var randomIndex = Math.floor(Math.random()*credentials_list.length);
         var credentials = credentials_list[randomIndex];
         parameters.push(['oauth_consumer_key', credentials.oauth_consumer_key]);
@@ -90,49 +104,7 @@ angular.module('SallServices', ['ngResource']).
         parameters = [];
         if (id == null)
           return null;
-
-        var credentials_list = [
-          {
-            owner: 'kevin',
-            oauth_consumer_key: 'UZL6qwkoVqDIByHuz4WF7g',
-            oauth_consumer_secret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
-            oauth_token: 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX',
-            accessor: {
-              consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
-              tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
-            }
-          },
-          {
-            owner: 'ron',
-            oauth_consumer_key: 'KdILwA5w8bjV8NTx47HkJA',
-            oauth_consumer_secret: 'nhFInOMyjm95pK9iyKy92drlaQc',
-            oauth_token: '7dMxuTAzgUVczcnpBdkOpJV4nEt2hLAu',
-            accessor: {
-              consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
-              tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
-            }
-          },
-          {
-            owner: 'ron2',
-            oauth_consumer_key: 'nF8RKvn6uMd8wIUXVLhvHg',
-            oauth_consumer_secret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
-            oauth_token: 'CuQ4y866Q6iEz8XVbua922J4fgYMJgc4',
-            accessor: {
-              consumerSecret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
-              tokenSecret: 'w93Pt2gGba328_OSncj8FxHkjKs'
-            }
-          },
-          {
-            owner: 'ron3',
-            oauth_consumer_key: 'lXkkkeStEoJiBDi69cCpNw',
-            oauth_consumer_secret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
-            oauth_token: 'cz5w-nSKGkA3NDomq2S4diSqboZdwVYb',
-            accessor: {
-              consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
-              tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
-            }
-          }
-        ];
+        
         var randomIndex = Math.floor(Math.random()*credentials_list.length);
         var credentials = credentials_list[randomIndex];
         parameters.push(['oauth_consumer_key', credentials.oauth_consumer_key]);
