@@ -24,7 +24,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
   var location = URL_Params.location ? URL_Params.location : 'New+York';
   $('#locationBar').val(''); //clear the location bar
   var limit = 20;
-  var offset = URL_Params.offset ? URL_Params.offset : 0;
+  var offset = URL_Params.offset ? parseInt(URL_Params.offset) : 0;
   var sort = URL_Params.sort ? URL_Params.sort : 0;
   var category_filter = URL_Params.category_filter ? URL_Params.category_filter : null;
   
@@ -106,6 +106,48 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
       item.isBookmarked = false;
       if (item.isBookmarked) item.bookmarkButtonText = "Edit Bookmark";
       else item.bookmarkButtonText = "Bookmark This!";
+      if (offset !== 0){
+        $('a.previousPage').show();
+        $scope.previousPage = function(){
+          var newOffset = offset-20;
+          if (newOffset < 0) newOffset = 0;
+          window.location= window.location.origin + window.location.pathname
+            + '#/search#query='+queryString
+            + '&limit=' + limit
+            + '&offset=' + newOffset
+            + '&sort=' + sort
+            + '&category_filter=' + (_.isNull(category_filter) ? '' : category_filter)
+            + '&location=' + location;
+            //var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);
+        };
+
+      }
+      else {
+        $scope.previousPage = undefined;
+        $('a.previousPage').hide();
+      }
+      if ($scope.results.length === limit){
+        $('a.nextPage').show();
+        $scope.nextPage = function(){
+          var newOffset = offset+20;
+          window.location= window.location.origin + window.location.pathname
+            + '#/search#query='+queryString
+            + '&limit=' + limit
+            + '&offset=' + newOffset
+            + '&sort=' + sort
+            + '&category_filter=' + (_.isNull(category_filter) ? '' : category_filter)
+            + '&location=' + location;
+            //var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);
+        };
+      }
+      else {
+        $scope.nextPage = undefined;
+        $('a.nextPage').hide();
+      }
+
+      
+      
+  
     });
 	});
 }
