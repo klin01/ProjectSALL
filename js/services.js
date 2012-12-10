@@ -1,13 +1,6 @@
 angular.module('SallServices', ['ngResource']).
 	factory('YelpAPI', function($resource) {
-		return $resource('proxy.php?url=:url&term=:term&location=:location'
-							+ "&oauth_consumer_key=:oauth_consumer_key"
-							+ "&oauth_consumer_secret=:oauth_consumer_secret"
-							+ "&oauth_nonce=:oauth_nonce"
-							+ "&oauth_signature_method=:oauth_signature_method"
-							+ "&oauth_timestamp=:oauth_timestamp"
-							+ "&oauth_token=:oauth_token"
-							+ "&oauth_signature=:oauth_signature", {}, {
+		return $resource('proxy.php?url=:url', {}, {
 			query: {method: 'GET', params: {}, isArray: false}
 		});
 	})
@@ -68,7 +61,7 @@ angular.module('SallServices', ['ngResource']).
               consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
 				  	  tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
             }
-          },
+         }
         ];
         var randomIndex = Math.floor(Math.random()*credentials_list.length);
         var credentials = credentials_list[randomIndex];
@@ -87,14 +80,79 @@ angular.module('SallServices', ['ngResource']).
 				OAuth.SignatureMethod.sign(message, credentials.accessor);
 
 				var parameterMap = OAuth.getParameterMap(message.parameters);
-				//parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+				parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
 
 				return message.action + '?' + OAuth.SignatureMethod.normalizeParameters(message.parameters) 
-					+ "&oauth_signature=" + OAuth.percentEncode(parameterMap.oauth_signature);
-				//return parameterMap;
+					+ "&oauth_signature=" + parameterMap.oauth_signature;
 			},
-      buildBusinessUrl: {
-        
+      buildBusinessUrl: function(id) {
+        parameters = [];
+        if (id == null)
+          return null;
+
+        var credentials_list = [
+          {
+            owner: 'kevin',
+            oauth_consumer_key: 'UZL6qwkoVqDIByHuz4WF7g',
+            oauth_consumer_secret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+            oauth_token: 'Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX',
+            accessor: {
+              consumerSecret: 'WEmWod-6fiDU0sR8o5_J8THvv1A',
+              tokenSecret: 'mA6XVBI_uaApfrJ2vbU1c3FyuFg'
+            }
+          },
+          {
+            owner: 'ron',
+            oauth_consumer_key: 'KdILwA5w8bjV8NTx47HkJA',
+            oauth_consumer_secret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+            oauth_token: '7dMxuTAzgUVczcnpBdkOpJV4nEt2hLAu',
+            accessor: {
+              consumerSecret: 'nhFInOMyjm95pK9iyKy92drlaQc',
+              tokenSecret: 'Jok4V3Day9Z3Y6VYLh6dMcJTdpU'
+            }
+          },
+          {
+            owner: 'ron2',
+            oauth_consumer_key: 'nF8RKvn6uMd8wIUXVLhvHg',
+            oauth_consumer_secret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+            oauth_token: 'CuQ4y866Q6iEz8XVbua922J4fgYMJgc4',
+            accessor: {
+              consumerSecret: '8kvsD5QpGrljKC8YFBtfEiVWbls',
+              tokenSecret: 'w93Pt2gGba328_OSncj8FxHkjKs'
+            }
+          },
+          {
+            owner: 'ron3',
+            oauth_consumer_key: 'lXkkkeStEoJiBDi69cCpNw',
+            oauth_consumer_secret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+            oauth_token: 'cz5w-nSKGkA3NDomq2S4diSqboZdwVYb',
+            accessor: {
+              consumerSecret: 'vPG32CCG5eHRegIlOu6L5yjBfXo',
+              tokenSecret: 'BJOxOKelArw6AIyJwoQ4IEdz59o'
+            }
+          }
+        ];
+        var randomIndex = Math.floor(Math.random()*credentials_list.length);
+        var credentials = credentials_list[randomIndex];
+        parameters.push(['oauth_consumer_key', credentials.oauth_consumer_key]);
+        parameters.push(['oauth_consumer_secret', credentials.oauth_consumer_secret]);
+        parameters.push(['oauth_token', credentials.oauth_token]);
+        parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
+
+        var message = { 
+            'action': 'http://api.yelp.com/v2/business/' + id,
+            'method': 'GET',
+            'parameters': parameters 
+        };
+
+        OAuth.setTimestampAndNonce(message);
+        OAuth.SignatureMethod.sign(message, credentials.accessor);
+
+        var parameterMap = OAuth.getParameterMap(message.parameters);
+        parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
+
+        return message.action + '?' + OAuth.SignatureMethod.normalizeParameters(message.parameters) 
+          + "&oauth_signature=" + parameterMap.oauth_signature;
       }
 		};
 	})
@@ -118,6 +176,10 @@ angular.module('SallServices', ['ngResource']).
           result.id = item.id;
           result.name = item.name;
           result.rating = item.rating;
+<<<<<<< HEAD
+=======
+          result.image_url = item.image_url;
+>>>>>>> rs_resolved_commit
           result.ratingString = "";
           var star = '&#9733;';
           var emptyStar = '&#9734;';
@@ -127,7 +189,10 @@ angular.module('SallServices', ['ngResource']).
           while (result.ratingString.length < 5*star.length){
             result.ratingString += emptyStar;
           }
+<<<<<<< HEAD
           result.img_url = item.image_url;
+=======
+>>>>>>> rs_resolved_commit
           result.url = item.url;
           result.phone = item.phone;
           result.snippet_text = item.snippet_text;
@@ -159,7 +224,7 @@ angular.module('SallServices', ['ngResource']).
           item.url = result.url;
           item.rating = result.rating;
           item.review_count = result.review_count;
-          item.img_url = result.img_url;
+          item.image_url = result.image_url;
           item.address = result.location.display_address; //array
           item.neighborhoods = result.location.neighborhoods; //array
           item.categories = result.categories; //array
@@ -174,18 +239,3 @@ angular.module('SallServices', ['ngResource']).
         }
     }  
   });
-
-var auth = { 
-  //
-  // Update with your auth tokens
-  //
-  consumerKey: "UZL6qwkoVqDIByHuz4WF7g",
-  consumerSecret: "WEmWod-6fiDU0sR8o5_J8THvv1A",
-  accessToken: "Vj32b4Ga1f0oHEj8KF5_KUEwzuGvrGhX",
-  // This example is a proof of concept, for how to use the Yelp v2 API with javascript.
-  // You wouldn't actually want to expose your access token secret like this in a real application.
-  accessTokenSecret: "mA6XVBI_uaApfrJ2vbU1c3FyuFg",
-  serviceProvider: { 
-    signatureMethod: "HMAC-SHA1"
-  }
-};
