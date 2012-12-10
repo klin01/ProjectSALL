@@ -70,7 +70,7 @@ var credentials_list = [
       consumerSecret: 'Oc0xxpcud8yt6P3HTzo4FKjELXE',
 			tokenSecret: 'oXcMK9vMC4MvPBzmcMVYMGNTmY8'
     }
-  }
+  },
     {
       owner: 'john',
       oauth_consumer_key: 'f7zEDdYZSwuf2cBE0DXGrw',
