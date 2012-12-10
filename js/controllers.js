@@ -2,6 +2,8 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 	var test = OAuthRequest.buildSearchUrl('chinese');
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
 
+    $scope.lists = SavedLists;
+
 	var samplesearchresults;
 	YelpAPI.query({ url: encodeURIComponent(test) }, function(rsp) {
     	samplesearchresults = SearchParse.scrub(rsp);

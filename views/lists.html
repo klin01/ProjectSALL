@@ -4,20 +4,10 @@
       <p><a class="btn btn-primary btn-small">+</a>&nbsp;&nbsp;&nbsp;&nbsp;Add New Tag </p>
       <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header">Filter by Tags</li>
-          <input type="checkbox" name="option1" value="Milk"> Morningside Restaurants <br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
+          <h4> Filter by Tags: </h4>
+          <li ng-repeat="list in lists" class="nav-header">
+          <input type="checkbox" name="{{list.name}}" value="{{list.name}}"> {{list.name}} <br>
+          </li>
         </ul><br><br>
       </div><!--/.well -->
     </div><!--/span-->
