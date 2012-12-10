@@ -5,7 +5,6 @@ angular.module('ProjectSALL', ['SallServices', 'ngSanitize']).
       when('/search', {redirectTo: '/searchresults'}).
       when('/searchresults', { controller: 'SearchResultsController', templateUrl: 'views/searchresults.html' }).
 			when('/help', { controller: 'HelpController', templateUrl: 'views/help.html' }).
-			when('/details', { controller: 'DetailsController', templateUrl: 'views/details.html' }).
       when('/reset', { controller: 'ResetController', templateUrl: 'views/lists.html'}).
 			otherwise({redirectTo:'/'});
 	});
