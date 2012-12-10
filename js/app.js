@@ -26,11 +26,13 @@ window.onbeforeunload = function(){
 };
 
 //Mousetrap is a library that makes binding keyboard shortcuts to functions easy
-Mousetrap.bind('enter', function(){
+Mousetrap.bind('enter', function(a,b,c){
   if ($('#searchBar').is(":focus") ||
       $('#locationBar').is(":focus"))
     onSearchClicked();
     //window.location= window.location.origin + window.location.pathname + $('#searchAnchor').attr('href');
+//  console.log($($(document.activeElement).context.parentNode).find('a'));
+  
 });
 
 function onSearchClicked(){
