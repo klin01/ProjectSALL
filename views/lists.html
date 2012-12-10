@@ -1,14 +1,14 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row-fluid">
     <div class="span3">
-      <p><a class="btn btn-primary btn-small">+</a>&nbsp;&nbsp;&nbsp;&nbsp;Add New Tag </p>
-      <div class="well sidebar-nav">
+      <div class="hero-unit">
         <ul class="nav nav-list">
           <h4> Filter by Tags: </h4>
           <li ng-repeat="list in lists" class="nav-header">
           <input type="checkbox" name="{{list.name}}" value="{{list.name}}"> {{list.name}} <br>
           </li>
-        </ul><br><br>
+        </ul><br>
+        <p align="center"><a class="btn btn-primary btn-small">+</a>&nbsp;&nbsp;&nbsp;&nbsp;Add New Tag </p>
       </div><!--/.well -->
     </div><!--/span-->
     <div class="span9">
