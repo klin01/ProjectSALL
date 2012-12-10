@@ -205,7 +205,7 @@ angular.module('SallServices', ['ngResource']).
           result.location = item.location.neighborhoods; //array
           result.categories = [];
           _.each(item.categories, function(cat){
-            result.categories.push(cat[0]);
+            result.categories.push({'display':cat[0], 'type':cat[1]});
           });
           items.push(result);
         });

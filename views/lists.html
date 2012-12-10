@@ -1,28 +1,18 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row-fluid">
     <div class="span3">
-      <div class="hero-unit">
+      <p><a class="btn btn-primary btn-small">+</a>&nbsp;&nbsp;&nbsp;&nbsp;Add New Tag </p>
+      <div class="well sidebar-nav">
         <ul class="nav nav-list">
-          <li class="nav-header">Filter by Tags</li>
-          <input type="checkbox" name="option1" value="Milk"> Morningside Restaurants <br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-          <input type="checkbox" name="option1" value="Milk"> Other Tag<br>
-        </ul><br>
-        <p align="center"><a class="btn btn-primary btn-small">+</a>&nbsp;&nbsp;&nbsp;&nbsp;Add New Tag </p>
+          <h4> Filter by Tags: </h4>
+          <li ng-repeat="list in lists" class="nav-header">
+          <input type="checkbox" name="{{list.name}}" value="{{list.name}}"> {{list.name}} <br>
+          </li>
+        </ul><br><br>
       </div><!--/.well -->
     </div><!--/span-->
     <div class="span9">
-    
+      <p ng-repeat="list in lists">{{list.name}}</p>
       <div class="hero-unit">
         	<table border="0" bordercolor="#000000" width="100%" cellpadding="3" cellspacing="3" align="left" valign="top">
 				<tr valign="top" overflow="auto">

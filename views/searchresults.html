@@ -1,33 +1,13 @@
 <div class="container">
   <div class="row-fluid">
     <div class="span12">
-      <div class="hero-unit">
-      		<table border="0" bordercolor="#000000" width="100%" cellpadding="3" cellspacing="3" align="left" valign="top">
-				<tr valign="top" overflow="auto">
-					<td valign="top"><a>Features</a>
-						<br><input type="checkbox" name="option1" value="Milk"> Delivery<br>
-          				<input type="checkbox" name="option1" value="Milk"> Pick-up<br>
-          				<input type="checkbox" name="option1" value="Milk"> Bottle Service<br>
-          				<input type="checkbox" name="option1" value="Milk"> Wine Tasting<br>          				
-					</td>
-					<td><a>Yelp Filter 2</a>
-						<br><input type="checkbox" name="option1" value="Milk"> Filter Option 1<br>
-          				<input type="checkbox" name="option1" value="Milk"> Filter Option 2<br>					
-					</td>
-					<td><a>Yelp Filter 3</a>
-						<br><input type="checkbox" name="option1" value="Milk"> Filter Option 1<br>
-          				<input type="checkbox" name="option1" value="Milk"> Filter Option 2<br>						
-					</td>
-					<td><a>Yelp Filter 4</a>
-						<br><input type="checkbox" name="option1" value="Milk"> Filter Option 1<br>
-          				<input type="checkbox" name="option1" value="Milk"> Filter Option 2<br>					
-					</td>
-					<td><a>Yelp Filter 5</a>
-						<br><input type="checkbox" name="option1" value="Milk"> Filter Option 1<br>
-          				<input type="checkbox" name="option1" value="Milk"> Filter Option 2<br>						
-					</td>						
-				</tr>																			
-			</table>
+      <div id="filters">
+        <h3 class="pull-right">Filter By:
+          <select id="filterPicker" onchange="filterSearch()">
+            <option>--Select a filter--</option>
+            <option ng-repeat="cat in categories">{{cat.display}}</option>
+          </select>
+        </h3>
       </div>
       
 			<!--Put the bookmarks here-->
@@ -37,26 +17,29 @@
       	<tr ng-repeat="result in results" id="{{result.id}}">
 					<td width="120"><img src="{{result.image_url}}"></td>
 					<td><p><strong class="search-item-title"><a href="{{result.url}}">{{result.name}}</a></strong><p>
-					  Category: {{result.categories.join(", ")}}<br>
+					  Category: {{result.categoriesString}}<br>
 					  Location: {{result.location.join(", ")}}
 					</td>
 					<td style="width:400px">Rating: <span class="rating" ng-bind-html="result.ratingString"></span><br>
             <span class="address" ng-bind-html="result.address"></span><br>
-					  ({{result.phone.substring(0,3)}}) {{result.phone.substring(3,6)}}-{{result.phone.substring(6,10)}}
+					  {{result.phoneString}}
 					  <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="result.bookmark(this)">{{result.bookmarkButtonText}}</a></span>
             <div class="save-section" style="display:none">
-              <form class="form-inline add-new-list">Add a New List: <input type="text" class="add-new-list-input input-small"> <a ng-click="result.addNewList()" class="btn btn-primary">+</a></form>
+              <form class="form-inline add-new-list">Add a New List:
+                <input type="text" class="add-new-list-input input-small mousetrap">
+                <a ng-click="result.addNewList()" class="btn btn-primary add-new-list-btn">+</a>
+              </form>
               <div class="list-of-lists"></div>
               <a class="btn btn-primary btn-small save-btn" ng-click="result.save()">Save Bookmark</a>
             </div>
-            
 					</td>
 				</tr>																	
 			</table>
 	<center>
-      <a class="btn btn-success pull previousPage" ng-click="previousPage()">Previous</a> 
-      <a class="btn btn-success pull nextPage" ng-click="nextPage()">Next Page</a>
-    </center>
+    <strong id="noResults" class="text-error">No Results were found with that search. Please try again.</strong>
+    <a class="btn btn-success pull-left previousPage" ng-click="previousPage()">Previous</a>
+    <a class="btn btn-success pull-right nextPage" ng-click="nextPage()">Next</a>
+  </center>
     </div><!--/span-->
   </div><!--/row-->
 
