@@ -107,7 +107,6 @@ angular.module('SallServices', ['ngResource']).
       var keyValue = pairs[i].split('=');
       parameters[keyValue[0]] = keyValue[1];
     }
-    console.log(parameters);
     return parameters;
   })
   .factory('SearchParse', function() {
@@ -119,13 +118,32 @@ angular.module('SallServices', ['ngResource']).
           result.id = item.id;
           result.name = item.name;
           result.rating = item.rating;
-          result.img_url = item.img_url;
+          result.ratingString = "";
+          var star = '&#9733;';
+          var emptyStar = '&#9734;';
+          for (var i = 0; i < item.rating; i++){
+            result.ratingString += star;
+          }
+          while (result.ratingString.length < 5*star.length){
+            result.ratingString += emptyStar;
+          }
+          result.img_url = item.image_url;
           result.url = item.url;
           result.phone = item.phone;
           result.snippet_text = item.snippet_text;
-          result.address = item.location.display_address; //array
+          result.address = "";
+          for (var i = 0; i < item.location.display_address.length-2; i++){
+            result.address += item.location.display_address[i] + " ";
+          }
+          result.address += '<br>' + item.location.display_address[
+            item.location.display_address.length-2] + ", " +
+            item.location.display_address[item.location.display_address.length-1];
+          
           result.location = item.location.neighborhoods; //array
-          result.categories = item.categories; //array
+          result.categories = [];
+          _.each(item.categories, function(cat){
+            result.categories.push(cat[0]);
+          });
           items.push(result);
         });
         return items;
