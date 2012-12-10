@@ -1,0 +1,10 @@
+.search-item-title{
+    font-size: 18px;
+}
+#search-loading-icon{
+    text-align: center;
+    margin: 0px auto;
+}
+.add-new-list {
+    margin: 10px 0 -10px;
+}
