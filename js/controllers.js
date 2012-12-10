@@ -17,6 +17,7 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params){
 
   //TODO - get search from URL params
+  //TODO - Have some sort of notifications system/display of system status
   var queryString = URL_Params.query ? URL_Params.query : 'chinese';
   var request = OAuthRequest.buildSearchUrl(queryString);
   $('#search-loading-icon').show();
@@ -46,6 +47,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
             alert('A list already exists with that name.');
           }
           else {
+            $('#'+item.id+ ' .add-new-list-input').val('');
             var comma = (labels.length > 0) ? ', ' : '';
             var newListHTML = comma+'<label class="checkbox"><input type="checkbox">'+ newListName +'</label>';
             _.each($('.lists-form'), function(listForm){ //add the list name to all visible lists of bookmarks. I was having trouble making this part dynamic with angular so I just did it manually
