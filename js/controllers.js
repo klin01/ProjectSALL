@@ -2,8 +2,7 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 	var test = OAuthRequest.buildSearchUrl('chinese');
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
 
-    $scope.lists = SavedLists;
-
+  /*
 	var samplesearchresults;
 	YelpAPI.query({ url: encodeURIComponent(test) }, function(rsp) {
     	samplesearchresults = SearchParse.scrub(rsp);
@@ -14,29 +13,46 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
     	samplebusinessresult = BusinessParse.scrub(rsp);
     	console.log(samplebusinessresult);
 	});
+  */
+
+  $scope.lists = SavedLists;
 }
 
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params, $location){
   //TODO - Have some sort of notifications system/display of system status
   //TODO - next/previous paging
   URL_Params = URL_Params.parse()
-  
-  var queryString = URL_Params.query ? URL_Params.query : 'chinese';
+  $('#filters').hide();
+  var queryString = URL_Params.query ? URL_Params.query : '';
   $('#searchBar').val(''); //clear the search bar
-  var location = URL_Params.location ? URL_Params.location : 'New+York';
+  var location = URL_Params.location ? URL_Params.location : '';
   $('#locationBar').val(''); //clear the location bar
   var limit = 20;
   var offset = URL_Params.offset ? parseInt(URL_Params.offset) : 0;
-  var sort = URL_Params.sort ? URL_Params.sort : 0;
+  var sort = URL_Params.sort ? URL_Params.sort : (URL_Params.location ? 1 : 0); //if a location is given, sort by location. otherwise, sort by best match
   var category_filter = URL_Params.category_filter ? URL_Params.category_filter : null;
   
   var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);
 
+  var categories = [];
   $('#search-loading-icon').show();
 	YelpAPI.query({ url: encodeURIComponent(request) }, function(yelpResponse) {
     $('#search-loading-icon').hide();
     $scope.results = SearchParse.scrub(yelpResponse);
+    if ($scope.results.length === 0) $('#noResults').show();
+    else $('#noResults').hide();
     _.each($scope.results, function(item){
+      if (item.phone)
+        item.phoneString = '('+item.phone.substring(0,3)+') ' + item.phone.substring(3,6)+'-'+item.phone.substring(6,10);
+      else
+        item.phoneString = ''
+
+      var categoryDisplays = []
+      _.each(item.categories, function(cat){
+        if (!_.contains(_.pluck(categories, 'display'), cat.display)) categories.push(cat);
+        categoryDisplays.push(cat.display);
+      });
+      item.categoriesString = categoryDisplays.join(', ');
       item.bookmark = function(){ //callback function to display lists
         $('#'+item.id+' .bookmark-btn').hide();
         var labels = [];
@@ -146,11 +162,29 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         $scope.nextPage = undefined;
         $('a.nextPage').hide();
       }
+      $scope.categories = _(categories).sortBy(function(cat){
+        return cat.display;
+      });
+      window.filterSearch = function(){
+        console.log('filter search');
+        var updatedCategories = [];
+        var selectedCategory = ''
+        _.each(categories, function(cat){
+          if (cat.display === $('#filterPicker').val())
+            selectedCategory = cat.type;
+        });
+        
+        window.location= window.location.origin + window.location.pathname
+          + '#/search#query='+queryString
+          + '&limit=' + limit
+          + '&offset=' + offset
+          + '&sort=' + sort
+          + '&category_filter=' + selectedCategory
+          + '&location=' + location;
+      }
 
-      
-      
-  
-    });
+      $('#filters').show();
+    });//end query
 	});
 }
 

@@ -21,6 +21,9 @@
 #searchBar {
 	width: 350px;
 }
-a.previousPage, a.nextPage {
+a.previousPage, a.nextPage, #noResults{
     display:none;
+}
+#filterPicker{
+    margin-top:5px;
 }
