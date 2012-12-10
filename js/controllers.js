@@ -8,7 +8,7 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
         SavedLists.push({name:$scope.addListText, venues: []});
         $scope.addListText = '';
     };
-
+/*
     var samplesearchresults;
 	YelpAPI.query({ url: encodeURIComponent(test) }, function(rsp) {
     	samplesearchresults = SearchParse.scrub(rsp);
