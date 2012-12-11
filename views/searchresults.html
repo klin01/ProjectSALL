@@ -18,10 +18,11 @@
       	<tr ng-repeat="result in results" id="{{result.id}}">
 					<td width="120"><img class="img-polaroid" src="{{result.image_url}}"></td>
 					<td><p><strong class="search-item-title"><a href="{{result.url}}">{{result.name}}</a></strong><p>
+            Rating: <span class="rating" ng-bind-html="result.ratingString"></span><br>
 					  Category: {{result.categoriesString}}<br>
 					  Location: {{result.location.join(", ")}}
 					</td>
-					<td style="width:400px">Rating: <span class="rating" ng-bind-html="result.ratingString"></span><br>
+					<td style="width:400px">
             <span class="address" ng-bind-html="result.address"></span><br>
 					  {{result.phoneString}}
 					  <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="result.bookmark(this)">{{result.bookmarkButtonText}}</a></span>
