@@ -39,10 +39,11 @@
             <tr ng-repeat="venue in venues" id="{{venue.id}}">
 				      <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>
 				      <td><p><strong class="search-item-title"><a href="{{venue.url}}">{{venue.name}}</a></strong><p>
+                  Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
 					        Category: {{venue.categoriesString}}<br>
 					        Location: {{venue.location.join(", ")}}
 				      </td>
-				      <td style="width:400px">Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
+				      <td style="width:400px">
                 <span class="address" ng-bind-html="venue.address"></span><br>
 					      {{venue.phoneString}}
 					      <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="venue.bookmark(this)">{{venue.bookmarkButtonText}}</a></span>
@@ -51,7 +52,9 @@
                     <input type="text" class="add-new-list-input input-small mousetrap">
                     <a ng-click="venue.addNewList()" class="btn btn-primary add-new-list-btn">+</a>
                   </form>
-                  <div class="list-of-lists"></div>
+                  <div class="list-of-lists">
+                    <label class="checkbox" ng-repeat="list in lists"><input type="checkbox">{{list.name}}</label>
+                  </div>
                   <a class="btn btn-primary btn-small save-btn" ng-click="venue.save()">Save Bookmark</a>
                 </div>
 				      </td>

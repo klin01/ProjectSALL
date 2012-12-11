@@ -20,6 +20,21 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
     }
     else {
       SavedLists.push({name:$scope.addListText, venues: []});
+      var labels = [];
+      for (var i = 0; i < SavedLists.length; i++){ //iterate through all lists and see if the venue is checked in the list
+        labels.push('<label class="checkbox"><input type="checkbox">'+SavedLists[i].name +'</label>');
+      }
+      var comma = (labels.length > 0) ? ', ' : '';
+      var newListHTML = comma+'<label class="checkbox"><input type="checkbox">'+ $scope.addListText +'</label>';
+      _.each($('.lists-form'), function(listForm){ //add the list name to all visible lists of bookmarks. I was having trouble making this part dynamic with angular so I just did it manually
+        $(listForm).append(newListHTML);
+      });
+      if (labels.length === 0){
+        _.each($('.list-of-lists'), function(listToCreate){
+          $(listToCreate).html(newListHTML);
+        });
+      }
+      labels.push(newListHTML);
       $scope.addListText = '';
     }
   };
@@ -30,6 +45,8 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
       alert('You cannot delete the Favorites list');
       return false;
     }
+    var removedListName = SavedLists[this.$index].name;
+    if (!confirm('Are you sure you want to delete the ' + removedListName + ' list?')) return;
     var counter = -1;
     var thisCopy = this;
     $scope.lists = SavedLists = _.reject($scope.lists, function(l){
@@ -65,7 +82,12 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
       $('.hasVenues').show();
     }
     
-
+    $('input[type="checkbox"]').each(function(){
+      var text = $($(this).parent()).text().trim();
+      if (text === removedListName)
+        $($(this).parent()).remove();
+    });
+    
   }
   $scope.selected = function(){
     if ($scope.selectedItem === "Most Reviews"){
@@ -173,9 +195,7 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 
           var newVenues = [];
           for (var i = 0; i < checkedList.length; i++){
-            _.each(SavedLists[checkedList[i]], function(list){
-              if (_.isUndefined(list)) return;
-              var ven = list.venues;
+            _.each(SavedLists[checkedList[i]].venues, function(ven){
               if (!_.contains(_.pluck(newVenues, 'id'), ven.id)){
                 newVenues.push(ven);
               }
@@ -330,7 +350,6 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         item.save = function(){
           var count = 0;
           var checkedCount = 0;
-          console.log(SavedLists);
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
             if (checkbox.checked === true){
               checkedCount++;
