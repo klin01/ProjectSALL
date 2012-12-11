@@ -1,13 +1,29 @@
 function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessParse) {
 	var test = OAuthRequest.buildSearchUrl('chinese');
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
+  
+  $scope.lists = SavedLists;
+  $scope.venues = [];
+  var addNew = function() {
+    SavedLists.push({name:$scope.addListText, venues: []});
+    $scope.addListText = '';
+  };
+  $scope.addNew = addNew;
+  $scope.clicked = function(){
+    $('.filterLists:checked').each(function(){
+      var that = this;
+      _.each(SavedLists, function(list){
+        if (list.name === $(that).val()){
+          _.each(list.venues, function(venue){
+            if (!_.contains(_.pluck($scope.venues, 'id'), venue.id))
+              $scope.venues.push(venue);
+          });
+        }
+      });
+      console.log($scope.venues);
+    });
+  };
 
-    $scope.lists = SavedLists;
-
-    $scope.addNew = function () {
-        SavedLists.push({name:$scope.addListText, venues: []});
-        $scope.addListText = '';
-    };
   /*
   var samplesearchresults;
 

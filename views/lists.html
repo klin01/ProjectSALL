@@ -1,27 +1,27 @@
 <div class="container">
   <div class="row-fluid">
     <div class="span3">
-        <p><input type="text" class="addBar" ng-model="addListText" ng-model-instant>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
+        <p><input type="text" class="addBar" ng-model="addListText">&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
         <div class="well">
-            <h4>Filter By:</h4>
-            <ul class="nav nav-list">
-                <li ng-repeat="list in lists" class="nav-header">
-                    <input type="checkbox" name="{{list.name}}" value="{{list.name}}"> {{list.name}} <br>
-                </li>
-            </ul><br>
-
-            <table class="table table-striped">
-                <tr ng-repeat="list in lists" class="nav-header">
-                    <input type="checkbox" name="{{list.name}}" value="{{list.name}}"> {{list.name}} <br>
-                </tr>
-            </table><br>
+            <h4>Display Venues From:</h4>
+            <form class="form form-inline" id="lists-of-lists">
+              <p ng-repeat="list in lists">
+                <input class="filterLists" type="checkbox" ng-click="clicked()" name="{{list.name}}" value="{{list.name}}"> <label class="checkbox"> {{list.name}}</label>
+              </p>
+            </form>
         </div><!--/.well -->
     </div><!--/span-->
+
     <div class="span9">
       <div class="hero-unit">
       </div>
         <div class="wrapper"> 
 			<!--Put the bookmarks here-->
+      <!--
+      <div ng-repeat="v in venues">
+        <p>{{v.id}}</p>
+      </div>
+      -->
 			<table class="table table-striped">
 				<tr>
 					<td width="150"> <img src="img/img1.jpg" height="150" width="150"> </td>
