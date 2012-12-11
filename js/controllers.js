@@ -218,6 +218,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
 	YelpAPI.query({ url: encodeURIComponent(request) }, function(yelpResponse) {
     $('#search-loading-icon').hide();
     $scope.results = SearchParse.scrub(yelpResponse);
+    var extraData = SearchParse.extra(yelpResponse);
     if ($scope.results.length === 0) $('#noResults').show();
     else $('#noResults').hide();
     _.each($scope.results, function(item){
@@ -388,6 +389,10 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
       });
       var totalTime = (new Date() - startTime)/1000;
       description += ' took ' + totalTime + ' seconds.';
+      var lowerBound = (parseInt(offset)+1);
+      var upperBound = (parseInt(offset)+parseInt(limit));
+      if (upperBound > extraData.total) upperBound = extraData.total;
+      description += ' Displaying ' + lowerBound + '-' + upperBound + ' of ' + extraData.total + ' results.';
       $('#description').html(description);
   
     });//end query
