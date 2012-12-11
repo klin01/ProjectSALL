@@ -45,8 +45,10 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
       alert('You cannot delete the Favorites list');
       return false;
     }
+
     var removedListName = SavedLists[this.$index].name;
     if (!confirm('Are you sure you want to delete the ' + removedListName + ' list?')) return;
+
     var counter = -1;
     var thisCopy = this;
     $scope.lists = SavedLists = _.reject($scope.lists, function(l){
@@ -87,7 +89,6 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
       if (text === removedListName)
         $($(this).parent()).remove();
     });
-    
   }
   $scope.selected = function(){
     if ($scope.selectedItem === "Most Reviews"){
@@ -195,7 +196,9 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 
           var newVenues = [];
           for (var i = 0; i < checkedList.length; i++){
-            _.each(SavedLists[checkedList[i]].venues, function(ven){
+            _.each(SavedLists[checkedList[i]], function(list){
+              if (_.isUndefined(list)) return;
+              var ven = list.venues;
               if (!_.contains(_.pluck(newVenues, 'id'), ven.id)){
                 newVenues.push(ven);
               }
@@ -350,6 +353,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         item.save = function(){
           var count = 0;
           var checkedCount = 0;
+          console.log(SavedLists);
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
             if (checkbox.checked === true){
               checkedCount++;
