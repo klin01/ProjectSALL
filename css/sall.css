@@ -27,3 +27,6 @@ a.previousPage, a.nextPage, #noResults{
 #filterPicker{
     margin-top:5px;
 }
+#sortBy{
+    margin-top:-46px;
+}

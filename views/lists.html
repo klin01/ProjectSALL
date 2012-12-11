@@ -26,6 +26,13 @@
             -->
         <div class="hasVenues" style="display:none">
           <h2>Venues from Selected Lists:</h2>
+          <h3 class="pull-right" id="sortBy">Sort By:
+            <select id="filterPicker" ng-model="selectedItem" ng-change="selected()">
+              <option>Highest Rating</option>
+              <option>Most Reviews</option>
+            </select>
+          </h3>
+      
           <table class="table table-striped">
             <tr ng-repeat="venue in venues" id="{{venue.id}}">
 				      <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>

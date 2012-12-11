@@ -9,6 +9,20 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
   };
   $scope.addNew = addNew;
 
+  $scope.selected = function(){
+    if ($scope.selectedItem === "Most Reviews"){
+      $scope.venues = _.sortBy($scope.venues, function(ven){
+        return -1*ven.review_count;
+      });
+      console.log($scope.venues);
+
+    }
+    else if ($scope.selectedItem === "Highest Rating"){
+      $scope.venues = _.sortBy($scope.venues, function(ven){
+        return -1*ven.rating;
+      });
+    }
+  }
   //TODO filter by price, location, category
   //TODO sort by highest rated, number of reviews
   $scope.clicked = function(){
