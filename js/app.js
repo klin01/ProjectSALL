@@ -38,7 +38,18 @@ Mousetrap.bind('enter', function(a,b,c){
 function onSearchClicked(){
   var query = $('#searchBar').val().split(' ').join('+');
   var location = $('#locationBar').val().split(' ').join('+');
-  window.location= window.location.origin + window.location.pathname +
+  if (query === '' && location === '') {
+    alert('Please enter a search term, location, or both, to search');
+    return;
+  }
+  
+  var origin = (_.isUndefined(window.location.origin))
+    ? window.location.origin = window.location.protocol + '//' + window.location.host
+    : window.location.origin;
+
+  var newLocation = origin + window.location.pathname +
     '#/search#query='+ query +
     '&location='+ location;
+  window.location = newLocation;
+
 };

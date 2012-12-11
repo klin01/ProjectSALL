@@ -8,8 +8,20 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
   
   $scope.lists = SavedLists;
   var addNew = function() {
-    SavedLists.push({name:$scope.addListText, venues: []});
-    $scope.addListText = '';
+    if ($scope.addListText === ''){
+      alert('Please provide a name for that list.');
+      return;
+    }
+    var listNameExists = _.some(_.pluck(SavedLists, 'name'), function(name){
+      return name === $scope.addListText;
+    });
+    if (listNameExists){
+      alert('A list already exists with that name.');
+    }
+    else {
+      SavedLists.push({name:$scope.addListText, venues: []});
+      $scope.addListText = '';
+    }
   };
   $scope.addNew = addNew;
 
