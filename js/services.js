@@ -194,7 +194,7 @@ angular.module('SallServices', ['ngResource']).
           result.id = item.id;
           result.name = item.name;
           result.rating = item.rating;
-          result.image_url = item.image_url;
+          result.image_url = item.image_url ? item.image_url : 'img/no-venue.jpg';
           result.ratingString = "";
           var star = '&#9733;';
           var emptyStar = '&#9734;';
