@@ -6,7 +6,9 @@
             <h4>Display Venues From:</h4>
             <form class="form form-inline" id="lists-of-lists">
               <p ng-repeat="list in lists">
-                <input class="filterLists" type="checkbox" ng-click="clicked()" name="{{list.name}}" value="{{list.name}}"> <label class="checkbox"> {{list.name}}</label>
+                <input class="filterLists" type="checkbox" ng-click="clicked()" name="{{list.name}}" value="{{list.name}}">
+                <label class="checkbox"> {{list.name}}</label>
+                <img class="removeListIcon" src="img/remove.png" ng-click="removeList()"/>
               </p>
             </form>
         </div><!--/.well -->

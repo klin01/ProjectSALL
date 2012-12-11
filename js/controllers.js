@@ -25,6 +25,48 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
   };
   $scope.addNew = addNew;
 
+  $scope.removeList = function(){
+    if (this.$index === 0) {
+      alert('You cannot delete the Favorites list');
+      return false;
+    }
+    var counter = -1;
+    var thisCopy = this;
+    $scope.lists = SavedLists = _.reject($scope.lists, function(l){
+      counter++;
+      if (counter == thisCopy.$index) return true;
+      else return false;
+    });
+
+    $scope.venues = [];
+    var count = -1;
+    window.checkedList = [];
+    $('.filterLists').each(function(){
+      var that = this;
+      count++;
+      if (!$(this).is(':checked')) return;
+      window.checkedList.push(count);
+      _.each(SavedLists, function(list){
+        if (list.name === $(that).val()){
+          _.each(list.venues, function(venue){
+            if (!_.contains(_.pluck($scope.venues, 'id'), venue.id))
+              $scope.venues.push(venue);
+          });
+        }
+      });
+    });
+
+    if ($scope.venues.length == 0){
+      $('.hasNoVenues').show();
+      $('.hasVenues').hide();
+    }
+    else {
+      $('.hasNoVenues').hide();
+      $('.hasVenues').show();
+    }
+    
+
+  }
   $scope.selected = function(){
     if ($scope.selectedItem === "Most Reviews"){
       $scope.venues = _.sortBy($scope.venues, function(ven){
@@ -131,7 +173,9 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 
           var newVenues = [];
           for (var i = 0; i < checkedList.length; i++){
-            _.each(SavedLists[checkedList[i]].venues, function(ven){
+            _.each(SavedLists[checkedList[i]], function(list){
+              if (_.isUndefined(list)) return;
+              var ven = list.venues;
               if (!_.contains(_.pluck(newVenues, 'id'), ven.id)){
                 newVenues.push(ven);
               }
@@ -265,7 +309,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
           else {
             $('#'+item.id+ ' .add-new-list-input').val('');
             var comma = (labels.length > 0) ? ', ' : '';
-            var newListHTML = comma+'<label class="checkbox"><input type="checkbox">'+ newListName +'</label>';
+            var newListHTML = comma+'<label class="checkbox"><input type="checkbox" class="addedCheckBox">'+ newListName +'</label>';
             _.each($('.lists-form'), function(listForm){ //add the list name to all visible lists of bookmarks. I was having trouble making this part dynamic with angular so I just did it manually
               $(listForm).append(newListHTML);
             });
@@ -286,6 +330,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         item.save = function(){
           var count = 0;
           var checkedCount = 0;
+          console.log(SavedLists);
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
             if (checkbox.checked === true){
               checkedCount++;
@@ -303,6 +348,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
             }
             count++;
           });
+          
           if (checkedCount > 0) {
             item.bookmarkButtonText = "Edit Bookmark";
             item.bookmarkButtonClass = 'btn-info';
