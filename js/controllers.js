@@ -38,9 +38,9 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
   var category_filter = URL_Params.category_filter ? URL_Params.category_filter : null;
   
   var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);
-
   var categories = [];
   $('#search-loading-icon').show();
+  var startTime = new Date();
 	YelpAPI.query({ url: encodeURIComponent(request) }, function(yelpResponse) {
     $('#search-loading-icon').hide();
     $scope.results = SearchParse.scrub(yelpResponse);
@@ -189,6 +189,17 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
       }
 
       $('#filters').show();
+      var description = 'Request for <strong>"' + queryString.split('+').join(' ') + '"</strong>';
+      if (parseInt(location) + '' === location) description += ' in <em>Zip code ' + location + '</em>';
+      else if (location.length > 0) description += ' in <em>' + location.split('+').join(' ') + '</em>';
+      if (!_.isNull(category_filter) && category_filter.length > 0) description += ' in the category ';
+      _.each(categories, function(cat){
+        if (cat.type === category_filter) description += '<em>'+cat.display+'</em>';
+      });
+      var totalTime = (new Date() - startTime)/1000;
+      description += ' took ' + totalTime + ' seconds.';
+      $('#description').html(description);
+  
     });//end query
 	});
 }
