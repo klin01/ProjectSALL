@@ -3,16 +3,29 @@
     <div class="span3">
         <p><input type="text" class="addBar" ng-model="addListText">&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
         <div class="well">
+<<<<<<< HEAD
             <h4>Display Venues From:</h4>
             <form class="form form-inline" id="lists-of-lists">
               <p ng-repeat="list in lists">
                 <input class="filterLists" type="checkbox" ng-click="clicked()" name="{{list.name}}" value="{{list.name}}"> <label class="checkbox"> {{list.name}}</label>
               </p>
             </form>
+=======
+            <h4>Filter By:</h4>
+            <table class="table table-striped">
+                <tr ng-repeat="list in lists"  class="nav-header" >
+                    <td>
+                    <input type="checkbox" name="{{list.name}}"> {{list.name}}
+                    </td>
+                </tr>
+
+            </table><br>
+>>>>>>> Home page UI changes
         </div><!--/.well -->
     </div><!--/span-->
 
     <div class="span9">
+<<<<<<< HEAD
       <div class="wrapper"> 
 			  <!--Put the bookmarks here-->
         <!--
@@ -44,6 +57,93 @@
 			    </tr>																	
 		    </table>
       </div> 
+=======
+      <div class="hero-unit">
+      </div>
+       <div id="filters">
+            <h3 class="pull-right">Filter By:
+                <select id="filterPicker" onchange="filterSearch()">
+                    <option>--Select a filter--</option>
+                    <option ng-repeat="cat in categories">{{cat.display}}</option>
+                </select>
+            </h3>
+       </div>
+        <div class="wrapper"> 
+			<!--Put the bookmarks here-->
+			<table class="table table-striped">
+				<tr>
+					<td width="150"> <img src="img/img1.jpg" height="150" width="150"> </td>
+					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
+					Category: <a> Mexican </a><br>
+					Location: <a> Harlem, NY </a><br>
+					</td>
+					<td valign="top">
+					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
+					20 N Abel St <br>
+					Milpitas, CA 95035 <br>
+					<a>(408) 946-0466</a> <br>
+					<a class="btn btn-primary btn-small">Edit Bookmark</a>
+					</td>
+				</tr>
+				<tr>
+					<td width="150"> <img src="img/img2.jpg" height="150" width="150"> </td>
+					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
+					Category: <a> Mexican </a><br>
+					Location: <a> Harlem, NY </a><br>
+					</td>
+					<td valign="top">
+					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
+					20 N Abel St <br>
+					Milpitas, CA 95035 <br>
+					<a>(408) 946-0466</a> <br>
+					<a class="btn btn-primary btn-small">Edit Bookmark</a>
+					</td>
+				</tr>
+				<tr>
+					<td width="150"> <img src="img/img3.jpg" height="150" width="150"> </td>
+					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
+					Category: <a> Mexican </a><br>
+					Location: <a> Harlem, NY </a><br>
+					</td>
+					<td valign="top">
+					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
+					20 N Abel St <br>
+					Milpitas, CA 95035 <br>
+					<a>(408) 946-0466</a> <br>
+					<a class="btn btn-primary btn-small">Edit Bookmark</a>
+					</td>
+				</tr>
+				<tr>
+					<td width="150"> <img src="img/img4.jpg" height="150" width="150"> </td>
+					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
+					Category: <a> Mexican </a><br>
+					Location: <a> Harlem, NY </a><br>
+					</td>
+					<td valign="top">
+					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
+					20 N Abel St <br>
+					Milpitas, CA 95035 <br>
+					<a>(408) 946-0466</a> <br>
+					<a class="btn btn-primary btn-small">Edit Bookmark</a>
+					</td>
+				</tr>
+				<tr>
+					<td width="150"> <img src="img/img10.jpg" height="150" width="150"> </td>
+					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
+					Category: <a> Mexican </a><br>
+					Location: <a> Harlem, NY </a><br>
+					</td>
+					<td valign="top">
+					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
+					20 N Abel St <br>
+					Milpitas, CA 95035 <br>
+					<a>(408) 946-0466</a> <br>
+					<a class="btn btn-primary btn-small">Edit Bookmark</a>
+					</td>
+				</tr>																			
+			</table>
+        </div> 
+>>>>>>> Home page UI changes
     </div><!--/span-->
   </div><!--/row-->
 

@@ -15,7 +15,7 @@ window.onload = function(){
   if (localStorage.lists === '"undefined"' ||
       localStorage.lists === 'undefined' ||
       _.isEmpty(JSON.parse(localStorage.lists)))
-    SavedLists = [{name:'Initial List', venues: []}];    
+    SavedLists = [{name:'Initial List', venues: []}];
   else
     SavedLists = JSON.parse(localStorage.lists);
 
