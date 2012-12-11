@@ -19,6 +19,7 @@ window.onload = function(){
   else
     SavedLists = JSON.parse(localStorage.lists);
 
+  window.checkedList = [];
 };
 window.onbeforeunload = function(){
   localStorage.lists = JSON.stringify(SavedLists);

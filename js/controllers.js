@@ -8,10 +8,16 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
     $scope.addListText = '';
   };
   $scope.addNew = addNew;
+
   $scope.clicked = function(){
     $scope.venues = [];
-    $('.filterLists:checked').each(function(){
+    var count = -1;
+    window.checkedList = [];
+    $('.filterLists').each(function(){
       var that = this;
+      count++;
+      if (!$(this).is(':checked')) return;
+      window.checkedList.push(count);
       _.each(SavedLists, function(list){
         if (list.name === $(that).val()){
           _.each(list.venues, function(venue){
@@ -21,6 +27,16 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
         }
       });
     });
+    /*
+    setInterval(function(){
+      var count = 0;
+      $('.filterLists').each(function(){
+        if (_.contains(window.checkedList, count))
+          $(this).prop('checked', true);
+        count++;
+      });
+    }, 500);
+    */
   };
 
   /*
