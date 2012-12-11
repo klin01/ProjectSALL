@@ -206,6 +206,11 @@ angular.module('SallServices', ['ngResource']).
           }
           result.url = item.url;
           result.phone = item.phone;
+          if (item.phone)
+            result.phoneString = '('+item.phone.substring(0,3)+') ' + item.phone.substring(3,6)+'-'+item.phone.substring(6,10);
+          else
+            result.phoneString = ''
+      
           result.snippet_text = item.snippet_text;
           result.address = "";
           for (var i = 0; i < item.location.display_address.length-2; i++){
@@ -220,6 +225,14 @@ angular.module('SallServices', ['ngResource']).
           _.each(item.categories, function(cat){
             result.categories.push({'display':cat[0], 'type':cat[1]});
           });
+          var categories = [];
+          var categoryDisplays = [];
+          _.each(result.categories, function(cat){
+            if (!_.contains(_.pluck(categories, 'display'), cat.display)) categories.push(cat);
+            categoryDisplays.push(cat.display);
+          });
+          result.categoriesString = categoryDisplays.join(', ');
+      
           items.push(result);
         });
         return items;

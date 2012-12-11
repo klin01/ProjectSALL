@@ -47,17 +47,6 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
     if ($scope.results.length === 0) $('#noResults').show();
     else $('#noResults').hide();
     _.each($scope.results, function(item){
-      if (item.phone)
-        item.phoneString = '('+item.phone.substring(0,3)+') ' + item.phone.substring(3,6)+'-'+item.phone.substring(6,10);
-      else
-        item.phoneString = ''
-
-      var categoryDisplays = []
-      _.each(item.categories, function(cat){
-        if (!_.contains(_.pluck(categories, 'display'), cat.display)) categories.push(cat);
-        categoryDisplays.push(cat.display);
-      });
-      item.categoriesString = categoryDisplays.join(', ');
       item.bookmark = function(){ //callback function to display lists
         $('#'+item.id+' .bookmark-btn').hide();
         var labels = [];
@@ -102,8 +91,10 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         //TODO - maybe at a "Close/Cancel" button?
         item.save = function(){
           var count = 0;
+          var checkedCount = 0;
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
             if (checkbox.checked === true){
+              checkedCount++;
               if (!_.contains(_.pluck(SavedLists[count].venues, 'id'), item.id)){ //see if the list has an object with an 'id' equivalent to the id of the venue
                 //Item is not in the current list, so add it
                 if (SavedLists[count].venues == undefined) SavedLists[count].venues = [];
@@ -118,6 +109,15 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
             }
             count++;
           });
+          if (checkedCount > 0) {
+            item.bookmarkButtonText = "Edit Bookmark";
+            item.bookmarkButtonClass = 'btn-info';
+          }
+          else {
+            item.bookmarkButtonText = "Bookmark This!";
+            item.bookmarkButtonClass = 'btn-warning';
+          }
+
           $('#'+item.id+' .save-section').hide();
           $('#'+item.id+' .bookmark-btn').show(); 
         };
@@ -125,10 +125,24 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         $('#'+item.id+ ' .save-section').slideDown('fast');
         $('#'+item.id+ ' .save-btn').show();
       };
-      item.bookmarksShowing = false;
+
+      //TODO Edit Bookmark vs. Bookmark this
+      
       item.isBookmarked = false;
-      if (item.isBookmarked) item.bookmarkButtonText = "Edit Bookmark";
-      else item.bookmarkButtonText = "Bookmark This!";
+      _.each(SavedLists, function(list){
+        _.each(list.venues, function(venue){
+          if (venue.id === item.id) item.isBookmarked = true;
+        });
+      });
+
+      if (item.isBookmarked){
+        item.bookmarkButtonText = "Edit Bookmark";
+        item.bookmarkButtonClass = 'btn-info';
+      }
+      else {
+        item.bookmarkButtonText = "Bookmark This!";
+        item.bookmarkButtonClass = 'btn-warning';
+      }
       if (offset !== 0){
         $('a.previousPage').show();
         $scope.previousPage = function(){
@@ -167,11 +181,13 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         $scope.nextPage = undefined;
         $('a.nextPage').hide();
       }
+      _.each(item.categories, function(cat){
+        if (!_.contains(_.pluck(categories, 'display'), cat.display)) categories.push(cat);
+      });
       $scope.categories = _(categories).sortBy(function(cat){
         return cat.display;
       });
       window.filterSearch = function(){
-        console.log('filter search');
         var updatedCategories = [];
         var selectedCategory = ''
         _.each(categories, function(cat){
