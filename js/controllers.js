@@ -294,7 +294,7 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
   $('#locationBar').val(''); //clear the location bar
   var limit = 20;
   var offset = URL_Params.offset ? parseInt(URL_Params.offset) : 0;
-  var sort = URL_Params.sort ? URL_Params.sort : (URL_Params.location ? 1 : 0); //if a location is given, sort by location. otherwise, sort by best match
+  var sort = URL_Params.sort ? URL_Params.sort : (URL_Params.location ? 0 : 0); //if a location is given, sort by location. otherwise, sort by best match
   var category_filter = URL_Params.category_filter ? URL_Params.category_filter : null;
   
   var request = OAuthRequest.buildSearchUrl(queryString, limit, offset, sort, category_filter, location);

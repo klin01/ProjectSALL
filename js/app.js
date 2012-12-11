@@ -40,7 +40,8 @@ function escapeSearchString(string){
     .split(' ').join('+')
     .split('&').join('')
     .split('=').join('')
-    .split('#').join('');
+    .split('#').join('')
+    .split('"').join('');
   
 }
 
@@ -55,7 +56,7 @@ function onSearchClicked(){
   query = escapeSearchString(query);
   location = escapeSearchString(location);
   if (query === '' && location === '') {
-    alert('Your query and location entries are both empty or have only invalid characters, such as ampersands (&), equal signs (=), or pound/hash marks (#)');
+    alert('Your query and location entries are both empty or have only invalid characters, such as ampersands (&), equal signs (=), double quotes ("), or pound/hash marks (#)');
     return;
   }
 
