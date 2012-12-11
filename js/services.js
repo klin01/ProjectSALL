@@ -225,6 +225,7 @@ angular.module('SallServices', ['ngResource']).
             item.location.display_address[item.location.display_address.length-1];
           
           result.location = item.location.neighborhoods; //array
+          if (_.isEmpty(result.location)) result.location = ['[No location provided by Yelp]']
           result.categories = [];
           _.each(item.categories, function(cat){
             result.categories.push({'display':cat[0], 'type':cat[1]});

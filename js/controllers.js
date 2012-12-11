@@ -14,8 +14,6 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
       $scope.venues = _.sortBy($scope.venues, function(ven){
         return -1*ven.review_count;
       });
-      console.log($scope.venues);
-
     }
     else if ($scope.selectedItem === "Highest Rating"){
       $scope.venues = _.sortBy($scope.venues, function(ven){
