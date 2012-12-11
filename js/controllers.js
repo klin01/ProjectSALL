@@ -196,14 +196,14 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 
           var newVenues = [];
           for (var i = 0; i < checkedList.length; i++){
-            _.each(SavedLists[checkedList[i]], function(list){
-              if (_.isUndefined(list)) return;
-              var ven = list.venues;
+            _.each(SavedLists[checkedList[i]].venues, function(ven){
               if (!_.contains(_.pluck(newVenues, 'id'), ven.id)){
                 newVenues.push(ven);
               }
             });
           }
+
+          
           var found = _.find(newVenues, function(ven){
             return ven.id === item.id;
           });
@@ -349,11 +349,10 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
         if (labels.length !== 0){
           listsHTML = '<br><form class="lists-form form-inline">'+listsHTML;
         }
-        //TODO - maybe at a "Close/Cancel" button?
+
         item.save = function(){
           var count = 0;
           var checkedCount = 0;
-          console.log(SavedLists);
           _.each($('#'+item.id+' .lists-form input'), function(checkbox){
             if (checkbox.checked === true){
               checkedCount++;
