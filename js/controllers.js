@@ -420,4 +420,8 @@ function HelpController($scope) {
   		window.scrollBy(0, -50);
   		return false;
   	};
+    $scope.scrollToTop = function() {
+      window.scrollTo(0,0);
+      return false;
+    };
 }
