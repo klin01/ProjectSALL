@@ -15,7 +15,7 @@ window.onload = function(){
   if (localStorage.lists === '"undefined"' ||
       localStorage.lists === 'undefined' ||
       _.isEmpty(JSON.parse(localStorage.lists)))
-    SavedLists = [{name:'Initial List', venues: []}];    
+    SavedLists = [{name:'Favorites', venues: []}];    
   else
     SavedLists = JSON.parse(localStorage.lists);
 
@@ -41,6 +41,7 @@ function onSearchClicked(){
   if (query === '' && location === '') {
     alert('Please enter a search term, location, or both, to search');
     return;
+    
   }
   
   var origin = (_.isUndefined(window.location.origin))
@@ -53,3 +54,11 @@ function onSearchClicked(){
   window.location = newLocation;
 
 };
+
+var alert = function(string){
+  $('#alertBox').html(string).fadeIn(500);
+  setTimeout(function(){
+    $('#alertBox').html(string).fadeOut(500)
+  }, 2000);
+  
+}

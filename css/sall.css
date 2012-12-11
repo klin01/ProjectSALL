@@ -30,3 +30,13 @@ a.previousPage, a.nextPage, #noResults{
 #sortBy{
     margin-top:-46px;
 }
+
+#alertBox{
+    padding: 5px;
+    text-align: center;
+    background: #feb8bd;
+    display:none;
+}
+.removeListIcon{
+    margin-left:5px;
+}
