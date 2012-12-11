@@ -11769,17 +11769,14 @@ a.badge:hover {
 
 #wrapper {
 	height: 300px;
-    width: 200px;
-    overflow: auto;
+  width: 200px;
+  overflow: auto;
 }
 .wrapper {
   /*overflow: auto; */
   height: 300px;
-  padding: 60px;
+  padding: 20px;
   margin-bottom: 30px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
   color: inherit;
   background-color: #ffffff;
   -webkit-border-radius: 6px;

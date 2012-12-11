@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row-fluid">
     <div class="span3">
-        <p><input type="text" class="addBar" ng-model="addListText">&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
+        <p><input type="text" class="addBar" ng-model="addListText">&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-small" ng-click="addNew()">Add List</a></p>
         <div class="well">
             <h4>Display Venues From:</h4>
             <form class="form form-inline" id="lists-of-lists">
@@ -13,88 +13,37 @@
     </div><!--/span-->
 
     <div class="span9">
-      <div class="hero-unit">
-      </div>
-        <div class="wrapper"> 
-			<!--Put the bookmarks here-->
-      <!--
-      <div ng-repeat="v in venues">
-        <p>{{v.id}}</p>
-      </div>
-      -->
-			<table class="table table-striped">
-				<tr>
-					<td width="150"> <img src="img/img1.jpg" height="150" width="150"> </td>
-					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
-					Category: <a> Mexican </a><br>
-					Location: <a> Harlem, NY </a><br>
-					</td>
-					<td valign="top">
-					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
-					20 N Abel St <br>
-					Milpitas, CA 95035 <br>
-					<a>(408) 946-0466</a> <br>
-					<a class="btn btn-primary btn-small">Edit Bookmark</a>
-					</td>
-				</tr>
-				<tr>
-					<td width="150"> <img src="img/img2.jpg" height="150" width="150"> </td>
-					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
-					Category: <a> Mexican </a><br>
-					Location: <a> Harlem, NY </a><br>
-					</td>
-					<td valign="top">
-					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
-					20 N Abel St <br>
-					Milpitas, CA 95035 <br>
-					<a>(408) 946-0466</a> <br>
-					<a class="btn btn-primary btn-small">Edit Bookmark</a>
-					</td>
-				</tr>
-				<tr>
-					<td width="150"> <img src="img/img3.jpg" height="150" width="150"> </td>
-					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
-					Category: <a> Mexican </a><br>
-					Location: <a> Harlem, NY </a><br>
-					</td>
-					<td valign="top">
-					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
-					20 N Abel St <br>
-					Milpitas, CA 95035 <br>
-					<a>(408) 946-0466</a> <br>
-					<a class="btn btn-primary btn-small">Edit Bookmark</a>
-					</td>
-				</tr>
-				<tr>
-					<td width="150"> <img src="img/img4.jpg" height="150" width="150"> </td>
-					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
-					Category: <a> Mexican </a><br>
-					Location: <a> Harlem, NY </a><br>
-					</td>
-					<td valign="top">
-					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
-					20 N Abel St <br>
-					Milpitas, CA 95035 <br>
-					<a>(408) 946-0466</a> <br>
-					<a class="btn btn-primary btn-small">Edit Bookmark</a>
-					</td>
-				</tr>
-				<tr>
-					<td width="150"> <img src="img/img10.jpg" height="150" width="150"> </td>
-					<td valign="top"><a href="#/details">Milano Restaurant</a><br>
-					Category: <a> Mexican </a><br>
-					Location: <a> Harlem, NY </a><br>
-					</td>
-					<td valign="top">
-					&#9733;&#9733;&#9733;&#9733;&#9734; <br>
-					20 N Abel St <br>
-					Milpitas, CA 95035 <br>
-					<a>(408) 946-0466</a> <br>
-					<a class="btn btn-primary btn-small">Edit Bookmark</a>
-					</td>
-				</tr>																			
-			</table>
-        </div> 
+      <div class="wrapper"> 
+			  <!--Put the bookmarks here-->
+        <!--
+            <div ng-repeat="v in venues">
+              <p>{{v.id}}</p>
+            </div>
+            -->
+        <h2>Venues from Selected Lists:</h2>
+        <table class="table table-striped">
+          <tr ng-repeat="venue in venues" id="{{venue.id}}">
+				    <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>
+				    <td><p><strong class="search-item-title"><a href="{{venue.url}}">{{venue.name}}</a></strong><p>
+					      Category: {{venue.categoriesString}}<br>
+					      Location: {{venue.location.join(", ")}}
+				    </td>
+				    <td style="width:400px">Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
+              <span class="address" ng-bind-html="venue.address"></span><br>
+					    {{venue.phoneString}}
+					    <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="venue.bookmark(this)">{{venue.bookmarkButtonText}}</a></span>
+              <div class="save-section" style="display:none">
+                <form class="form-inline add-new-list">Add a New List:
+                  <input type="text" class="add-new-list-input input-small mousetrap">
+                  <a ng-click="venue.addNewList()" class="btn btn-primary add-new-list-btn">+</a>
+                </form>
+                <div class="list-of-lists"></div>
+                <a class="btn btn-primary btn-small save-btn" ng-click="venue.save()">Save Bookmark</a>
+              </div>
+				    </td>
+			    </tr>																	
+		    </table>
+      </div> 
     </div><!--/span-->
   </div><!--/row-->
 

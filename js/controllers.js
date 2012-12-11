@@ -3,13 +3,13 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
   
   $scope.lists = SavedLists;
-  $scope.venues = [];
   var addNew = function() {
     SavedLists.push({name:$scope.addListText, venues: []});
     $scope.addListText = '';
   };
   $scope.addNew = addNew;
   $scope.clicked = function(){
+    $scope.venues = [];
     $('.filterLists:checked').each(function(){
       var that = this;
       _.each(SavedLists, function(list){
@@ -20,7 +20,6 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
           });
         }
       });
-      console.log($scope.venues);
     });
   };
 
