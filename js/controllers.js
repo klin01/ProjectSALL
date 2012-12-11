@@ -1,6 +1,10 @@
 function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessParse) {
 	var test = OAuthRequest.buildSearchUrl('chinese');
 	var test2 = OAuthRequest.buildBusinessUrl('new-kam-hing-coffee-shop-new-york');
+
+	//update selection on navigation bar
+	$("#navBookmarks").attr("class", "active");
+  	$("#navHelp").removeAttr("class");
   
   $scope.lists = SavedLists;
   var addNew = function() {
@@ -198,6 +202,11 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
 function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL_Params, $location){
   //TODO - Have some sort of notifications system/display of system status
   //TODO - next/previous paging
+
+  //Change navigation bar selection
+  $("#navBookmarks").removeAttr("class");
+  $("#navHelp").removeAttr("class");
+
   URL_Params = URL_Params.parse()
   $('#filters').hide();
   var queryString = URL_Params.query ? URL_Params.query : '';
@@ -399,4 +408,16 @@ function SearchResultsController($scope, YelpAPI, OAuthRequest, SearchParse, URL
 
 function ResetController(){
   SavedLists = [];
+}
+
+function HelpController($scope) {
+	//update selection on navigation bar
+	$("#navBookmarks").removeAttr("class");
+  	$("#navHelp").attr("class", "active");
+
+  	$scope.scrollToSection = function (id) {
+  		document.getElementById(id).scrollIntoView(true);
+  		window.scrollBy(0, -50);
+  		return false;
+  	};
 }
