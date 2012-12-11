@@ -220,9 +220,12 @@ angular.module('SallServices', ['ngResource']).
           for (var i = 0; i < item.location.display_address.length-2; i++){
             result.address += item.location.display_address[i] + " ";
           }
-          result.address += '<br>' + item.location.display_address[
-            item.location.display_address.length-2] + ", " +
-            item.location.display_address[item.location.display_address.length-1];
+
+          var firstAddressPiece = item.location.display_address[item.location.display_address.length-2];
+          var secondAddressPiece = item.location.display_address[item.location.display_address.length-1];
+          result.address += '<br>' +
+             (_.isUndefined(firstAddressPiece) ? '' : firstAddressPiece + ', ') + secondAddressPiece;
+            
           
           result.location = item.location.neighborhoods; //array
           if (_.isEmpty(result.location)) result.location = ['[No location provided by Yelp]']
