@@ -40,7 +40,7 @@
             <tr ng-repeat="venue in venues" id="{{venue.id}}">
 				      <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>
 				      <td><p><strong class="search-item-title"><a href="{{venue.url}}">{{venue.name}}</a></strong><p>
-                  Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
+                  Rating: <span class="rating" ng-bind-html="venue.ratingString"></span>&nbsp;({{venue.review_count}} reviews)<br>
 					        Category: {{venue.categoriesString}}<br>
 					        Location: {{venue.location.join(", ")}}
 				      </td>
