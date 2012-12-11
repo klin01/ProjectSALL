@@ -9,6 +9,8 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
   };
   $scope.addNew = addNew;
 
+  //TODO filter by price, location, category
+  //TODO sort by highest rated, number of reviews
   $scope.clicked = function(){
     $scope.venues = [];
     var count = -1;
@@ -27,6 +29,14 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
         }
       });
     });
+    if ($scope.venues.length == 0){
+      $('.hasNoVenues').show();
+      $('.hasVenues').hide();
+    }
+    else {
+      $('.hasNoVenues').hide();
+      $('.hasVenues').show();
+    }
     _.each($scope.venues, function(item){
       item.bookmark = function(){ //callback function to display lists
         $('#'+item.id+' .bookmark-btn').hide();
@@ -90,13 +100,35 @@ function ListsController ($scope, YelpAPI, OAuthRequest, SearchParse, BusinessPa
             }
             count++;
           });
-          if (checkedCount > 0) {
+
+          var newVenues = [];
+          for (var i = 0; i < checkedList.length; i++){
+            _.each(SavedLists[checkedList[i]].venues, function(ven){
+              if (!_.contains(_.pluck(newVenues, 'id'), ven.id)){
+                newVenues.push(ven);
+              }
+            });
+          }
+          var found = _.find(newVenues, function(ven){
+            return ven.id === item.id;
+          });
+          if (checkedCount > 0 && !_.isUndefined(found)) { //the second piece of this makes sure that even if the venue is in another list, but that list is hidden, the venue should be hidden
             item.bookmarkButtonText = "Edit Bookmark";
             item.bookmarkButtonClass = 'btn-info';
           }
           else {
-            item.bookmarkButtonText = "Bookmark This!";
-            item.bookmarkButtonClass = 'btn-warning';
+            $scope.venues = _.reject($scope.venues, function(ven){
+              if (ven.id === item.id) return true;
+              else return false;
+            });
+            if ($scope.venues.length == 0){
+              $('.hasNoVenues').show();
+              $('.hasVenues').hide();
+            }
+            else {
+              $('.hasNoVenues').hide();
+              $('.hasVenues').show();
+            }
           }
 
           $('#'+item.id+' .save-section').hide();

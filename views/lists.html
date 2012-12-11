@@ -13,36 +13,42 @@
     </div><!--/span-->
 
     <div class="span9">
-      <div class="wrapper"> 
+      <div class="wrapper">
+        <div class="hasNoVenues">
+          <h1>There are no venues listed here.</h1>
+        </div>
+
 			  <!--Put the bookmarks here-->
         <!--
             <div ng-repeat="v in venues">
               <p>{{v.id}}</p>
             </div>
             -->
-        <h2>Venues from Selected Lists:</h2>
-        <table class="table table-striped">
-          <tr ng-repeat="venue in venues" id="{{venue.id}}">
-				    <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>
-				    <td><p><strong class="search-item-title"><a href="{{venue.url}}">{{venue.name}}</a></strong><p>
-					      Category: {{venue.categoriesString}}<br>
-					      Location: {{venue.location.join(", ")}}
-				    </td>
-				    <td style="width:400px">Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
-              <span class="address" ng-bind-html="venue.address"></span><br>
-					    {{venue.phoneString}}
-					    <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="venue.bookmark(this)">{{venue.bookmarkButtonText}}</a></span>
-              <div class="save-section" style="display:none">
-                <form class="form-inline add-new-list">Add a New List:
-                  <input type="text" class="add-new-list-input input-small mousetrap">
-                  <a ng-click="venue.addNewList()" class="btn btn-primary add-new-list-btn">+</a>
-                </form>
-                <div class="list-of-lists"></div>
-                <a class="btn btn-primary btn-small save-btn" ng-click="venue.save()">Save Bookmark</a>
-              </div>
-				    </td>
-			    </tr>																	
-		    </table>
+        <div class="hasVenues" style="display:none">
+          <h2>Venues from Selected Lists:</h2>
+          <table class="table table-striped">
+            <tr ng-repeat="venue in venues" id="{{venue.id}}">
+				      <td width="120"><img class="img-polaroid" src="{{venue.image_url}}"></td>
+				      <td><p><strong class="search-item-title"><a href="{{venue.url}}">{{venue.name}}</a></strong><p>
+					        Category: {{venue.categoriesString}}<br>
+					        Location: {{venue.location.join(", ")}}
+				      </td>
+				      <td style="width:400px">Rating: <span class="rating" ng-bind-html="venue.ratingString"></span><br>
+                <span class="address" ng-bind-html="venue.address"></span><br>
+					      {{venue.phoneString}}
+					      <span class="bookmark-btn"><br><br><a class="btn btn-primary btn-small" ng-click="venue.bookmark(this)">{{venue.bookmarkButtonText}}</a></span>
+                <div class="save-section" style="display:none">
+                  <form class="form-inline add-new-list">Add a New List:
+                    <input type="text" class="add-new-list-input input-small mousetrap">
+                    <a ng-click="venue.addNewList()" class="btn btn-primary add-new-list-btn">+</a>
+                  </form>
+                  <div class="list-of-lists"></div>
+                  <a class="btn btn-primary btn-small save-btn" ng-click="venue.save()">Save Bookmark</a>
+                </div>
+				      </td>
+			      </tr>																	
+		      </table>
+        </div>
       </div> 
     </div><!--/span-->
   </div><!--/row-->
